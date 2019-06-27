@@ -113,10 +113,8 @@ public:
      std::string GetTreasuryRewardAddressAtHeight(int height) const;
      CScript GetTreasuryRewardScriptAtHeight(int height) const;
      // Min amount in order to stake
-         CAmount StakeInput() const
-    {
-        return nMinStakeInput;
-    }
+    CAmount StakeInput() const { return nMinStakeInput;  }
+	CAmount StakeInputV2() const { return nMinStakeInputV2; }
 
     /** Zerocoin **/
     std::string Zerocoin_Modulus() const { return zerocoinModulus; }
@@ -136,6 +134,12 @@ public:
     int Zerocoin_StartHeight() const { return nZerocoinStartHeight; }
     int Zerocoin_LastOldParams() const { return nZerocoinLastOldParams; }
 
+    /** Dev payment related things **/
+    int StartTreasuryBlock() const { return nStartTreasuryBlock; }
+    int TreasuryBlockStep() const { return nTreasuryBlockStep; }
+
+    /** Refund related things **/
+    std::string RefundAddress() const { return vRefundAddress; }
 protected:
     CChainParams() {}
 
@@ -159,7 +163,11 @@ protected:
     int nMaturity;
     unsigned int nStakeMaturity;
     int nModifierUpdateBlock;
+
+	//Staking Related
     CAmount nMinStakeInput;
+	CAmount nMinStakeInputV2;
+
     CAmount nMaxMoneyOut;
     int nMinerThreads;
     std::vector<CDNSSeedData> vSeeds;
@@ -199,6 +207,12 @@ protected:
     int nZerocoinStartHeight;
     int nZerocoinLastOldParams;
     
+    //Dev payment related
+    int nStartTreasuryBlock;
+    int nTreasuryBlockStep;
+
+    //Refund related
+    std::string vRefundAddress;
 };
 
 /**
